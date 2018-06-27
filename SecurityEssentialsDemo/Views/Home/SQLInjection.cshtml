@@ -1,0 +1,32 @@
+﻿@model SecurityEssentialsDemo.Models.InjectionSampleItem[]
+
+<h3>Items (@Model.Length):</h3>
+@foreach (var item in Model)
+{
+    <p>Id: @item.Id Text: @item.Text</p>
+}
+
+<h3>Add:</h3>
+@using (Html.BeginForm("SQLInjection", "Home"))
+{
+    @Html.TextBox("text")
+    <button class="btn btn-primary" type="submit">Add item</button>
+}
+
+<h3>Search (SELECT [Id], [Text] FROM [dbo].[InjectionSampleItems] WHERE [Text] LIKE '%input%'):</h3>
+@using (Html.BeginForm("SQLInjectionSearch", "Home", FormMethod.Get))
+{
+    @Html.TextBox("input")
+    <button class="btn btn-primary" type="submit">Search</button>
+}
+
+<h3>SafeSearch (SELECT [Id], [Text] FROM [dbo].[InjectionSampleItems] WHERE [Text] LIKE '%' + @@input + '%'):</h3>
+@using (Html.BeginForm("SQLInjectionSafeSearch", "Home", FormMethod.Get))
+{
+    @Html.TextBox("safeinput")
+    <button class="btn btn-primary" type="submit">Search</button>
+}
+
+
+<h3>Try search inputs:</h3>
+<p>test'; WHILE (1=1) BEGIN INSERT INTO [dbo].[InjectionSampleItems] VALUES (newid(), 'injected'); END--</p>

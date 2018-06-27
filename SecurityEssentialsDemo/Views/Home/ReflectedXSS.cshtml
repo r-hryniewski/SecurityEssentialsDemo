@@ -1,0 +1,15 @@
+﻿@model string
+
+<h3>You've entered: @Html.Raw(Model)</h3>
+@using (Html.BeginForm("ReflectedXSS", "Home", FormMethod.Get))
+{
+    @Html.TextBox("text");
+    <button class="btn btn-primary" type="submit">Post</button>
+}
+
+<h3>Try this:</h3>
+<p>@("<p>TEST<script>alert('xss')</script></p>")</p>
+<p>@("<script>document.body.innerHTML = '<h1>HAX!</h1>'</script>")</p>
+<p>@("<script>['', '-ms-', '-webkit-', '-o-', '-moz-'].map(function(prefix){document.body.style[prefix + 'transform']='rotate(180deg)';});</script>")</p>
+
+<p><a href="https://gist.github.com/marcaube/692b5bdb99ba69b9b60f471d2721aa95#file-harlem-shake-js-L2" target="_blank">Let's dance!</a></p>

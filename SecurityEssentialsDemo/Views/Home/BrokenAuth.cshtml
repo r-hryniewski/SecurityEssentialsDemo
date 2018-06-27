@@ -1,0 +1,22 @@
+﻿@model string
+
+<h3>Login form:</h3>
+@using (Html.BeginForm())
+{
+    <label>UserName</label>
+    @Html.TextBox("UserName")
+    <label>Password</label>
+    @Html.Password("Password")
+    if (!string.IsNullOrWhiteSpace(Model))
+    {
+        <p class="text-danger"><b>@Model</b></p>
+    }
+    <button class="btn btn-primary" type="submit">Login</button>
+
+}
+
+
+<h3>Registered users:</h3>
+<p>rafal//1234</p>
+<p>user//password</p>
+<p>admin//admin</p>
