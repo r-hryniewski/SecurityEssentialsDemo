@@ -1,5 +1,5 @@
 console.log("test");
 
-$.get("response", function (result) {
-    console.log(result)
+$.get("https://jsonplaceholder.typicode.com/todos/1", function (response) {
+    console.log(response);
 });
